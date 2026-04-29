@@ -10,6 +10,8 @@ Source: jest + playwright runs on merged `tests/fe-qa` (origin/main + QA test su
 | ~~FE-004~~ | ~~Low~~ | **CLOSED — fixed by team** ([ProfileActions.tsx:33-42](../../../Frontend/media/src/components/Profile/ProfileActions.tsx)) | – |
 | FE-005 | Low | LoginModal has no forgot-password entry point (BE endpoint exists, UI does not expose) | [FE-005.md](FE-005.md) |
 | FE-006 | Low | OAuth callback handler not implemented — Google/Facebook buttons exist, redirect flow does not | [FE-006.md](FE-006.md) |
+| ~~FE-007~~ | ~~High~~ | ~~E2E `apiRegister` missing `display_name` → 422 on every fresh registration~~ | **FIXED** `e2e/real/fixtures/api-client.ts` |
+| ~~FE-008~~ | ~~High~~ | ~~E2E real-backend tests use wrong API response shapes (envelope + field names)~~ | **FIXED** 7 files in `e2e/real/` |
 
 ## Test environment
 

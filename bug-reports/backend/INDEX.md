@@ -12,6 +12,10 @@ Source: pytest run on merged `tests/be-qa` (origin/main + QA test suite). Bugs v
 | BE-006 | ~~Low~~ | ~~Audio Range 416/404 edge cases untested~~ | **CLOSED** commit `d37a77b` |
 | BE-007 | ~~Low~~ | ~~Upload-size violations return 400; HTTP recommends 413/422~~ | **CLOSED** PR #76 |
 | BE-DX-001 | Info | Strict env config breaks pytest at import without `DATABASE_URL`/`SECRET_KEY` | [BE-DX-001.md](BE-DX-001.md) |
+| BE-DX-002 | Medium | Backend `startup()` is PostgreSQL-only; server cannot start without Postgres (blocks E2E) | [BE-DX-002.md](BE-DX-002.md) |
+| BE-008 | High | `POST /playlists/{id}/like` returns 400 on newly-created playlist (auto-like on create + wrong status code) | [BE-008.md](BE-008.md) |
+| BE-009 | High | CORS only allows `localhost:3000`; blocks all other frontend origins (browser "Failed to fetch") | [BE-009.md](BE-009.md) |
+| BE-010 | Medium | `PATCH /users/me/username` with own username returns 200 instead of 409/422 | [BE-010.md](BE-010.md) |
 
 ## Test environment
 
@@ -29,5 +33,6 @@ Source: pytest run on merged `tests/be-qa` (origin/main + QA test suite). Bugs v
 
 ## Still open
 
-BE-003, BE-004, BE-005, BE-006 — all coverage/feature gaps, no runtime bugs.
+BE-003, BE-004 — coverage/feature gaps, no runtime bugs.
 BE-DX-001 — env config DX, low priority.
+BE-DX-002 — backend requires PostgreSQL; no docker-compose; blocks real-API E2E (medium priority).
