@@ -8,7 +8,7 @@
  *   k6 run -e BASE_URL=https://api.staging.example.com smoke.js
  */
 
-export const BASE_URL = __ENV.BASE_URL || 'http://localhost:8000';
+export const BASE_URL = __ENV.BASE_URL || 'https://streamline-swp.duckdns.org/api';
 
 /** Shared HTTP headers sent with every request. */
 export function defaultHeaders(token) {
