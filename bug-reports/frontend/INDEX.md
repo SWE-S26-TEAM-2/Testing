@@ -35,3 +35,4 @@ Net: 78 team commits did not touch any of the 5 still-open issues.
 ## Out-of-scope (QA-side, not team bugs)
 
 None this round. All 9 jest fails + 39 playwright fails map to one of FE-001/FE-002/FE-003.
+| FE-009 | Medium | Next.js Middleware Auth Guard blocks Playwright E2E Tests on Protected Routes | [FE-009.md](FE-009.md) |
