@@ -6,7 +6,7 @@
 ---
 
 ## 1. Executive Summary
-An exhaustive execution of all project test suites was performed, alongside a live `k6` stress test against the Backend API.
+An exhaustive execution of all project test suites was performed. All End-to-End (E2E) and Stress Testing scripts were executed directly against the live deployed environment (`streamline-swp.duckdns.org`) instead of local servers, ensuring real-world fidelity.
 
 | Area | Status | Summary |
 |------|--------|---------|
@@ -64,7 +64,7 @@ Running `flutter test --no-pub` immediately crashes with a **Compilation Error**
 **Yes.** Stress testing tools like `k6` simulate thousands of concurrent network requests sent directly to the API endpoints. They bypass the Frontend (Next.js) and Mobile (Flutter) UIs entirely. The goal is to see if the database locks up, if the Python server runs out of memory, or if response times spike when 50+ people use the app at exactly the same second.
 
 ### Methodology
-We spun up the Backend server locally (`uvicorn` on port 8000) and ran two scripts:
+We pointed the `k6` stress testing scripts at the live production API (`https://streamline-swp.duckdns.org/api`) and ran two scripts:
 1. **Smoke Test (`smoke.js`):** A low-load check (2 users) to ensure all endpoints were reachable.
 2. **Auth Load Test (`auth.load.js`):** A 2.5-minute ramp-up test simulating up to **50 concurrent users** hitting `/auth/login`, `/auth/register`, and `/auth/refresh`.
 
