@@ -12,6 +12,8 @@ Source: jest + playwright runs on merged `tests/fe-qa` (origin/main + QA test su
 | FE-006 | Low | OAuth callback handler not implemented — Google/Facebook buttons exist, redirect flow does not | [FE-006.md](FE-006.md) |
 | ~~FE-007~~ | ~~High~~ | ~~E2E `apiRegister` missing `display_name` → 422 on every fresh registration~~ | **FIXED** `e2e/real/fixtures/api-client.ts` |
 | ~~FE-008~~ | ~~High~~ | ~~E2E real-backend tests use wrong API response shapes (envelope + field names)~~ | **FIXED** 7 files in `e2e/real/` |
+| FE-009 | Medium | Next.js Middleware Auth Guard blocks Playwright E2E Tests on Protected Routes | [FE-009.md](FE-009.md) |
+| FE-010 | Medium | Deploy E2E feed-interaction tests fail when authenticated account has empty feed | [FE-010.md](FE-010.md) |
 
 ## Test environment
 
@@ -35,4 +37,16 @@ Net: 78 team commits did not touch any of the 5 still-open issues.
 ## Out-of-scope (QA-side, not team bugs)
 
 None this round. All 9 jest fails + 39 playwright fails map to one of FE-001/FE-002/FE-003.
-| FE-009 | Medium | Next.js Middleware Auth Guard blocks Playwright E2E Tests on Protected Routes | [FE-009.md](FE-009.md) |
+
+## Latest deploy verification (2026-05-02)
+
+- Command: `npm run test:e2e:real`
+- Result: **38 passed, 3 skipped, 4 failed**
+- Skips: profile tests skipped intentionally when deploy slugs are not configured:
+  - `E2E_PROFILE_ARTIST_SLUG`
+  - `E2E_PROFILE_OWNER_SLUG`
+- Fails (all tied to empty `/stream` feed for current test account):
+  - `user can like a track from the feed`
+  - `feed track overflow menu exposes add-to-queue`
+  - `clicking play on a feed track activates pause in the footer player`
+  - `footer transport toggles playback state`
