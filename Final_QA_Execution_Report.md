@@ -27,8 +27,8 @@ The E2E suite uses Playwright to simulate real user browsers.
 - **Result:** Passing. The UI successfully renders results without crashing on empty queries.
 
 ### `feed.spec.ts`
-- **What it tests:** Navigation between `/home` and `/stream`, ensuring the authenticated layout wrapper and main headers render properly.
-- **Result:** Mostly passing. Auth guard redirect test failed due to test-environment cookie issues.
+- **What it tests:** Navigation between `/home` and `/stream`, ensuring the authenticated layout wrapper and main shell render properly.
+- **Result:** Passing on deploy.
 
 ### `library.spec.ts`
 - **What it tests:** The 7-tab navigation system inside the Library (Overview, Likes, Playlists, Albums, Stations, Following, History).
@@ -43,12 +43,26 @@ The E2E suite uses Playwright to simulate real user browsers.
 - **Result:** Passing (when local).
 
 ### `player.spec.ts` (Advanced)
-- **What it tests:** Audio playback controls. Verifies that clicking Play triggers the global footer player, the Play/Pause toggles work, and the volume slider is rendered.
-- **Result:** WARN. (Times out on deployed environment waiting for mock feed data, but verified locally).
+- **What it tests:** Audio playback controls. Verifies that clicking Play triggers the global footer player and transport toggles work.
+- **Result:** Partial. 2 failures on deploy when `/stream` has no track cards (empty feed data for current test account).
 
 ### `interactions.spec.ts` (Advanced)
-- **What it tests:** Social and library mutations. Verifies that a user can "Like" a track from the feed, "Follow" a user from their profile, and open the "Add to Playlist" modal.
-- **Result:** WARN. (Times out on deployed environment waiting for mock feed data, but verified locally).
+- **What it tests:** Social and library mutations. Verifies that a user can "Like" a track from the feed, "Follow" a user from their profile, and open the feed overflow action.
+- **Result:** Partial. 2 failures on deploy are feed-data dependent (`/stream` has no playable tracks for this account).
+
+### `profile.spec.ts`
+- **What it tests:** Public/owner profile page rendering and tab switching.
+- **Result:** Conditionally skipped in deploy mode unless `E2E_PROFILE_ARTIST_SLUG` and `E2E_PROFILE_OWNER_SLUG` are provided (3 skips in latest run).
+
+### Latest Frontend E2E run (deploy)
+- **Pass:** 38
+- **Skip:** 3 (missing deploy profile slug env vars)
+- **Fail:** 4 (feed empty-state blocks track-dependent assertions)
+- **Failing tests:**
+  - `Social and Library Interactions › user can like a track from the feed`
+  - `Social and Library Interactions › feed track overflow menu exposes add-to-queue`
+  - `Global Audio Player › clicking play on a feed track activates pause in the footer player`
+  - `Global Audio Player › footer transport toggles playback state`
 
 ---
 
